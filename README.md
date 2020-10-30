@@ -1,2 +1,3 @@
-# go-chan
-Go concurrency pattern collection
+# Go concurrency pattern collection
+
+This repository aims to collect pretty patterns for concurrency in Golang
