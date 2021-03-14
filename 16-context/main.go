@@ -1,3 +1,5 @@
+// This implemented a sample from the video
+// https://www.youtube.com/watch?v=LSzR0VEraWw
 package main
 
 import (
