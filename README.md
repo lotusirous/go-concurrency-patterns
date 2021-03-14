@@ -24,10 +24,10 @@ Context:
 | 6-select-timeout       | Add Timeout to a goroutine                         |
 | 7-quit-signal          | Quit signal                                        |
 | 8-daisy-chan           | Daisy chan pattern                                 |
-| 9-google1.0            | Build a concurrent google search the from grown-up |
-| 10-google2.0           | Build a concurrent google search the from grown-up |
-| 11-google2.1           | Build a concurrent google search the from grown-up |
-| 12-google3.0           | Build a concurrent google search the from grown-up |
+| 9-google1.0            | Build a concurrent google search from the grown-up |
+| 10-google2.0           | Build a concurrent google search from the grown-up |
+| 11-google2.1           | Build a concurrent google search from the grown-up |
+| 12-google3.0           | Build a concurrent google search from the grown-up |
 | 13-adv-pingpong        | A sample ping-pong table implemented in goroutine  |
 | 14-adv-subscription    | Subcribtion                                        |
 | 16-context             | How to user context in HTTP client and server      |
