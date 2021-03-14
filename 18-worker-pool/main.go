@@ -78,5 +78,6 @@ func main() {
 	for a := 1; a <= numbJobs; a++ {
 		<-results
 	}
+	close(results)
 
 }
