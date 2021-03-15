@@ -18,6 +18,7 @@ Context:
 - [Go Concurrency Patterns: Context](https://blog.golang.org/context)
 - [How to correctly use package context](https://www.youtube.com/watch?v=-_B5uQ4UGi0)
 - [justforfunc #9: The Context Package](https://www.youtube.com/watch?v=LSzR0VEraWw)
+- [Contexts and structs](https://blog.golang.org/context-and-structs)
 
 | Name                   | Description                                        |
 |------------------------|----------------------------------------------------|
