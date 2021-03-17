@@ -22,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "hello")
 	case <-ctx.Done():
 		err := ctx.Err()
-		log.Printf(err)
+		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
