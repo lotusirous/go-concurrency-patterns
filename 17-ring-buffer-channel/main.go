@@ -6,10 +6,11 @@ import "log"
 // Ref:
 // https://tanzu.vmware.com/content/blog/a-channel-based-ring-buffer-in-go
 
-func NewRingBuffer(inCh, outCh chan int) *ringBuffer {
+func NewRingBuffer(inCh, outCh chan int, down chan bool) *ringBuffer {
 	return &ringBuffer{
 		inCh:  inCh,
 		outCh: outCh,
+		down:  down,
 	}
 }
 
@@ -17,6 +18,7 @@ func NewRingBuffer(inCh, outCh chan int) *ringBuffer {
 type ringBuffer struct {
 	inCh  chan int
 	outCh chan int
+	down  chan bool
 }
 
 func (r *ringBuffer) Run() {
@@ -28,13 +30,15 @@ func (r *ringBuffer) Run() {
 			r.outCh <- v
 		}
 	}
+	r.down <- true
 	close(r.outCh)
 }
 
 func main() {
 	inCh := make(chan int)
 	outCh := make(chan int, 4) // try to change outCh buffer to understand the result
-	rb := NewRingBuffer(inCh, outCh)
+	down := make(chan bool, 1)
+	rb := NewRingBuffer(inCh, outCh, down)
 	go rb.Run()
 
 	for i := 0; i < 10; i++ {
@@ -43,8 +47,9 @@ func main() {
 
 	close(inCh)
 
-	for res := range outCh {
-		log.Println(res)
+	if <-down == true {
+		for res := range outCh {
+			log.Println(res)
+		}
 	}
-
 }
