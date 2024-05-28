@@ -1,3 +1,3 @@
 module github.com/lotusirous/gochan
 
-go 1.15
+go 1.21
