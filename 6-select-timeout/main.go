@@ -14,7 +14,6 @@ func boring(msg string) <-chan string { // <-chan string means receives-only cha
 			c <- fmt.Sprintf("%s %d", msg, i)
 			time.Sleep(time.Duration(rand.Intn(1500)) * time.Millisecond)
 		}
-
 	}()
 	return c // return a channel to caller.
 }
@@ -29,7 +28,7 @@ func main() {
 		case s := <-c:
 			fmt.Println(s)
 		case <-timeout:
-			fmt.Println("You talk too much.")
+			fmt.Println("no response, you talk too slow")
 			return
 		}
 	}
