@@ -19,14 +19,29 @@ type ringBuffer struct {
 	outCh chan int
 }
 
+// Run moves items from inCh to outCh, dropping the oldest item when outCh is
+// full, and closes outCh once inCh is closed.
+//
+// Run must be the only sender on outCh.
 func (r *ringBuffer) Run() {
 	for v := range r.inCh {
+		// There is room: just send.
 		select {
 		case r.outCh <- v:
+			continue
 		default:
-			<-r.outCh // pop one item from outchan
-			r.outCh <- v
 		}
+
+		// outCh looked full, so drop the oldest item. Never block here: a
+		// consumer may have emptied outCh since the select above, and a
+		// blocking receive would wait for a value only Run itself can send.
+		select {
+		case <-r.outCh:
+		default:
+		}
+
+		// Safe: Run is the only sender, so the slot freed above is still free.
+		r.outCh <- v
 	}
 	close(r.outCh)
 }
